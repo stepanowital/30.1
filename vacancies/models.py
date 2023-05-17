@@ -28,6 +28,8 @@ class Vacancy(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	skills = models.ManyToManyField(Skill)
 
+	likes = models.IntegerField(default=0)
+
 	class Meta:
 		verbose_name = "Вакансия"
 		verbose_name_plural = "Вакансии"
@@ -35,6 +37,10 @@ class Vacancy(models.Model):
 
 	def __str__(self):
 		return self.slug
+
+	@property
+	def username(self):
+		return self.user.username if self.user else None
 
 
 
